@@ -1,0 +1,94 @@
+❯ kc apply -f manifests
+persistentvolumeclaim/ebs-claim created
+pod/app created
+storageclass.storage.k8s.io/ebs-sc created
+❯ kgp
+NAMESPACE     NAME                                   READY   STATUS    RESTARTS   AGE
+default       app                                    0/1     Pending   0          3s
+kube-system   aws-node-wj68b                         1/1     Running   0          18h
+kube-system   aws-node-zpqzl                         1/1     Running   0          18h
+kube-system   coredns-6ff9c46cd8-pnqv8               1/1     Running   0          19h
+kube-system   coredns-6ff9c46cd8-xt9v9               1/1     Running   0          19h
+kube-system   ebs-csi-controller-6c68c6d6d5-hzbwz    6/6     Running   0          33m
+kube-system   ebs-csi-controller-6c68c6d6d5-zspkn    5/6     Error     0          33m
+kube-system   ebs-csi-node-p7bdz                     3/3     Running   0          33m
+kube-system   ebs-csi-node-sc6tp                     3/3     Running   0          33m
+kube-system   kube-proxy-2fpht                       1/1     Running   0          18h
+kube-system   kube-proxy-wvwlp                       1/1     Running   0          18h
+kube-system   snapshot-controller-55687d7977-qq2mf   1/1     Running   0          18h
+kube-system   snapshot-controller-55687d7977-slhbg   1/1     Running   0          18h
+❯ kgp
+NAMESPACE     NAME                                   READY   STATUS    RESTARTS     AGE
+default       app                                    0/1     Pending   0            8s
+kube-system   aws-node-wj68b                         1/1     Running   0            18h
+kube-system   aws-node-zpqzl                         1/1     Running   0            18h
+kube-system   coredns-6ff9c46cd8-pnqv8               1/1     Running   0            19h
+kube-system   coredns-6ff9c46cd8-xt9v9               1/1     Running   0            19h
+kube-system   ebs-csi-controller-6c68c6d6d5-hzbwz    6/6     Running   0            33m
+kube-system   ebs-csi-controller-6c68c6d6d5-zspkn    6/6     Running   1 (6s ago)   33m
+kube-system   ebs-csi-node-p7bdz                     3/3     Running   0            33m
+kube-system   ebs-csi-node-sc6tp                     3/3     Running   0            33m
+kube-system   kube-proxy-2fpht                       1/1     Running   0            18h
+kube-system   kube-proxy-wvwlp                       1/1     Running   0            18h
+kube-system   snapshot-controller-55687d7977-qq2mf   1/1     Running   0            18h
+kube-system   snapshot-controller-55687d7977-slhbg   1/1     Running   0            18h
+❯ kgp
+NAMESPACE     NAME                                   READY   STATUS    RESTARTS      AGE
+default       app                                    0/1     Pending   0             15s
+kube-system   aws-node-wj68b                         1/1     Running   0             18h
+kube-system   aws-node-zpqzl                         1/1     Running   0             18h
+kube-system   coredns-6ff9c46cd8-pnqv8               1/1     Running   0             19h
+kube-system   coredns-6ff9c46cd8-xt9v9               1/1     Running   0             19h
+kube-system   ebs-csi-controller-6c68c6d6d5-hzbwz    6/6     Running   0             33m
+kube-system   ebs-csi-controller-6c68c6d6d5-zspkn    6/6     Running   1 (13s ago)   33m
+kube-system   ebs-csi-node-p7bdz                     3/3     Running   0             33m
+kube-system   ebs-csi-node-sc6tp                     3/3     Running   0             33m
+kube-system   kube-proxy-2fpht                       1/1     Running   0             18h
+kube-system   kube-proxy-wvwlp                       1/1     Running   0             18h
+kube-system   snapshot-controller-55687d7977-qq2mf   1/1     Running   0             18h
+kube-system   snapshot-controller-55687d7977-slhbg   1/1     Running   0             18h
+❯ kgp
+NAMESPACE     NAME                                   READY   STATUS    RESTARTS      AGE
+default       app                                    0/1     Pending   0             20s
+kube-system   aws-node-wj68b                         1/1     Running   0             18h
+kube-system   aws-node-zpqzl                         1/1     Running   0             18h
+kube-system   coredns-6ff9c46cd8-pnqv8               1/1     Running   0             19h
+kube-system   coredns-6ff9c46cd8-xt9v9               1/1     Running   0             19h
+kube-system   ebs-csi-controller-6c68c6d6d5-hzbwz    6/6     Running   0             33m
+kube-system   ebs-csi-controller-6c68c6d6d5-zspkn    6/6     Running   1 (18s ago)   33m
+kube-system   ebs-csi-node-p7bdz                     3/3     Running   0             33m
+kube-system   ebs-csi-node-sc6tp                     3/3     Running   0             33m
+kube-system   kube-proxy-2fpht                       1/1     Running   0             18h
+kube-system   kube-proxy-wvwlp                       1/1     Running   0             18h
+kube-system   snapshot-controller-55687d7977-qq2mf   1/1     Running   0             18h
+kube-system   snapshot-controller-55687d7977-slhbg   1/1     Running   0             18h
+❯ kgp
+NAMESPACE     NAME                                   READY   STATUS              RESTARTS      AGE
+default       app                                    0/1     ContainerCreating   0             25s
+kube-system   aws-node-wj68b                         1/1     Running             0             18h
+kube-system   aws-node-zpqzl                         1/1     Running             0             18h
+kube-system   coredns-6ff9c46cd8-pnqv8               1/1     Running             0             19h
+kube-system   coredns-6ff9c46cd8-xt9v9               1/1     Running             0             19h
+kube-system   ebs-csi-controller-6c68c6d6d5-hzbwz    5/6     Error               0             34m
+kube-system   ebs-csi-controller-6c68c6d6d5-zspkn    6/6     Running             1 (23s ago)   34m
+kube-system   ebs-csi-node-p7bdz                     3/3     Running             0             34m
+kube-system   ebs-csi-node-sc6tp                     3/3     Running             0             34m
+kube-system   kube-proxy-2fpht                       1/1     Running             0             18h
+kube-system   kube-proxy-wvwlp                       1/1     Running             0             18h
+kube-system   snapshot-controller-55687d7977-qq2mf   1/1     Running             0             18h
+kube-system   snapshot-controller-55687d7977-slhbg   1/1     Running             0             18h
+❯ kgp
+NAMESPACE     NAME                                   READY   STATUS              RESTARTS      AGE
+default       app                                    0/1     ContainerCreating   0             29s
+kube-system   aws-node-wj68b                         1/1     Running             0             18h
+kube-system   aws-node-zpqzl                         1/1     Running             0             18h
+kube-system   coredns-6ff9c46cd8-pnqv8               1/1     Running             0             19h
+kube-system   coredns-6ff9c46cd8-xt9v9               1/1     Running             0             19h
+kube-system   ebs-csi-controller-6c68c6d6d5-hzbwz    6/6     Running             1 (6s ago)    34m
+kube-system   ebs-csi-controller-6c68c6d6d5-zspkn    6/6     Running             1 (27s ago)   34m
+kube-system   ebs-csi-node-p7bdz                     3/3     Running             0             34m
+kube-system   ebs-csi-node-sc6tp                     3/3     Running             0             34m
+kube-system   kube-proxy-2fpht                       1/1     Running             0             18h
+kube-system   kube-proxy-wvwlp                       1/1     Running             0             18h
+kube-system   snapshot-controller-55687d7977-qq2mf   1/1     Running             0             18h
+kube-system   snapshot-controller-55687d7977-slhbg   1/1     Running             0             18h
