@@ -1,0 +1,561 @@
+# Note the csi-attacher and csi-provisioner both restarted, but on different controllers
+# ❯ kc describe -n kube-system pod/ebs-csi-controller-dcdd5c665-bp7hc
+Name:                 ebs-csi-controller-dcdd5c665-bp7hc
+Namespace:            kube-system
+Priority:             2000000000
+Priority Class Name:  system-cluster-critical
+Service Account:      ebs-csi-controller-sa
+Node:                 ip-192-168-82-154.us-west-2.compute.internal/192.168.82.154
+Start Time:           Thu, 14 Dec 2023 02:06:49 +0000
+Labels:               app=ebs-csi-controller
+                      app.kubernetes.io/component=csi-driver
+                      app.kubernetes.io/instance=aws-ebs-csi-driver
+                      app.kubernetes.io/managed-by=Helm
+                      app.kubernetes.io/name=aws-ebs-csi-driver
+                      app.kubernetes.io/version=1.25.0
+                      helm.sh/chart=aws-ebs-csi-driver-2.25.0
+                      pod-template-hash=dcdd5c665
+Annotations:          <none>
+Status:               Running
+IP:                   192.168.65.183
+IPs:
+  IP:           192.168.65.183
+Controlled By:  ReplicaSet/ebs-csi-controller-dcdd5c665
+Containers:
+  ebs-plugin:
+    Container ID:  containerd://2a0dd08c4048631d8552b23b0516a6e3c97852e0b19a8432fbf7b6267f67f68a
+    Image:         public.ecr.aws/ebs-csi-driver/aws-ebs-csi-driver:v1.25.0
+    Image ID:      public.ecr.aws/ebs-csi-driver/aws-ebs-csi-driver@sha256:b85fac6ddea18044a217aa5a64c2fa5abdcd92f1c5345bac196c60dc6ab074fc
+    Port:          9808/TCP
+    Host Port:     0/TCP
+    Args:
+      controller
+      --endpoint=$(CSI_ENDPOINT)
+      --batching=true
+      --logging-format=text
+      --user-agent-extra=helm
+      --v=2
+    State:          Running
+      Started:      Thu, 14 Dec 2023 02:06:50 +0000
+    Ready:          True
+    Restart Count:  0
+    Limits:
+      memory:  256Mi
+    Requests:
+      cpu:      10m
+      memory:   40Mi
+    Liveness:   http-get http://:healthz/healthz delay=10s timeout=3s period=10s #success=1 #failure=5
+    Readiness:  http-get http://:healthz/healthz delay=10s timeout=3s period=10s #success=1 #failure=5
+    Environment:
+      CSI_ENDPOINT:                 unix:///var/lib/csi/sockets/pluginproxy/csi.sock
+      CSI_NODE_NAME:                 (v1:spec.nodeName)
+      AWS_ACCESS_KEY_ID:            <set to the key 'key_id' in secret 'aws-secret'>      Optional: true
+      AWS_SECRET_ACCESS_KEY:        <set to the key 'access_key' in secret 'aws-secret'>  Optional: true
+      AWS_EC2_ENDPOINT:             <set to the key 'endpoint' of config map 'aws-meta'>  Optional: true
+      AWS_STS_REGIONAL_ENDPOINTS:   regional
+      AWS_DEFAULT_REGION:           us-west-2
+      AWS_REGION:                   us-west-2
+      AWS_ROLE_ARN:                 arn:aws:iam::208536326202:role/EBSCSIDriverRoleusual
+      AWS_WEB_IDENTITY_TOKEN_FILE:  /var/run/secrets/eks.amazonaws.com/serviceaccount/token
+    Mounts:
+      /var/lib/csi/sockets/pluginproxy/ from socket-dir (rw)
+      /var/run/secrets/eks.amazonaws.com/serviceaccount from aws-iam-token (ro)
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-b2wg2 (ro)
+  csi-provisioner:
+    Container ID:  containerd://5d8e87ea7099155b0af6e2469eb325c83bb9a7f63a0104fc7f55697075d24795
+    Image:         public.ecr.aws/eks-distro/kubernetes-csi/external-provisioner:v3.6.2-eks-1-28-9
+    Image ID:      602401143452.dkr.ecr.us-west-2.amazonaws.com/eks/csi-provisioner@sha256:8e523a788fffc72359e7177c2b5110a0193fcbb910eb13d489959d4e5da4844c
+    Port:          <none>
+    Host Port:     <none>
+    Args:
+      --timeout=60s
+      --csi-address=$(ADDRESS)
+      --v=2
+      --feature-gates=Topology=true
+      --extra-create-metadata
+      --leader-election=true
+      --default-fstype=ext4
+      --kube-api-qps=20
+      --kube-api-burst=100
+      --worker-threads=100
+    State:          Running
+      Started:      Thu, 14 Dec 2023 02:06:50 +0000
+    Ready:          True
+    Restart Count:  0
+    Limits:
+      memory:  256Mi
+    Requests:
+      cpu:     10m
+      memory:  40Mi
+    Environment:
+      ADDRESS:                      /var/lib/csi/sockets/pluginproxy/csi.sock
+      AWS_STS_REGIONAL_ENDPOINTS:   regional
+      AWS_DEFAULT_REGION:           us-west-2
+      AWS_REGION:                   us-west-2
+      AWS_ROLE_ARN:                 arn:aws:iam::208536326202:role/EBSCSIDriverRoleusual
+      AWS_WEB_IDENTITY_TOKEN_FILE:  /var/run/secrets/eks.amazonaws.com/serviceaccount/token
+    Mounts:
+      /var/lib/csi/sockets/pluginproxy/ from socket-dir (rw)
+      /var/run/secrets/eks.amazonaws.com/serviceaccount from aws-iam-token (ro)
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-b2wg2 (ro)
+  csi-attacher:
+    Container ID:  containerd://354d7c892f0e10d5695919af09729f93c32afa10f1ecc40ddf16354cda02b83e
+    Image:         public.ecr.aws/eks-distro/kubernetes-csi/external-attacher:v4.4.2-eks-1-28-9
+    Image ID:      602401143452.dkr.ecr.us-west-2.amazonaws.com/eks/csi-attacher@sha256:aebbe79854c2420c08c1dc6afcc96e24c35cd2b29b617396f07df9155b6ca328
+    Port:          <none>
+    Host Port:     <none>
+    Args:
+      --timeout=60s
+      --csi-address=$(ADDRESS)
+      --v=2
+      --leader-election=true
+      --kube-api-qps=20
+      --kube-api-burst=100
+      --worker-threads=100
+    State:          Running
+      Started:      Thu, 14 Dec 2023 02:53:45 +0000
+    Last State:     Terminated
+      Reason:       Error
+      Message:      Lost connection to CSI driver, exiting
+      Exit Code:    1
+      Started:      Thu, 14 Dec 2023 02:06:50 +0000
+      Finished:     Thu, 14 Dec 2023 02:53:43 +0000
+    Ready:          True
+    Restart Count:  1
+    Limits:
+      memory:  256Mi
+    Requests:
+      cpu:     10m
+      memory:  40Mi
+    Environment:
+      ADDRESS:                      /var/lib/csi/sockets/pluginproxy/csi.sock
+      AWS_STS_REGIONAL_ENDPOINTS:   regional
+      AWS_DEFAULT_REGION:           us-west-2
+      AWS_REGION:                   us-west-2
+      AWS_ROLE_ARN:                 arn:aws:iam::208536326202:role/EBSCSIDriverRoleusual
+      AWS_WEB_IDENTITY_TOKEN_FILE:  /var/run/secrets/eks.amazonaws.com/serviceaccount/token
+    Mounts:
+      /var/lib/csi/sockets/pluginproxy/ from socket-dir (rw)
+      /var/run/secrets/eks.amazonaws.com/serviceaccount from aws-iam-token (ro)
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-b2wg2 (ro)
+  csi-snapshotter:
+    Container ID:  containerd://9bc42f459c86bd5a10bbdff936bdf13a56f023e1c66aa56787b8e9373eab9cd4
+    Image:         public.ecr.aws/eks-distro/kubernetes-csi/external-snapshotter/csi-snapshotter:v6.3.2-eks-1-28-9
+    Image ID:      602401143452.dkr.ecr.us-west-2.amazonaws.com/eks/csi-snapshotter@sha256:d89d10ee97b46acf4f7b43a030b87752a2f1a72793035ee60dd10589a8c1c21a
+    Port:          <none>
+    Host Port:     <none>
+    Args:
+      --csi-address=$(ADDRESS)
+      --leader-election=true
+      --extra-create-metadata
+      --kube-api-qps=20
+      --kube-api-burst=100
+      --worker-threads=100
+    State:          Running
+      Started:      Thu, 14 Dec 2023 02:06:50 +0000
+    Ready:          True
+    Restart Count:  0
+    Limits:
+      memory:  256Mi
+    Requests:
+      cpu:     10m
+      memory:  40Mi
+    Environment:
+      ADDRESS:                      /var/lib/csi/sockets/pluginproxy/csi.sock
+      AWS_STS_REGIONAL_ENDPOINTS:   regional
+      AWS_DEFAULT_REGION:           us-west-2
+      AWS_REGION:                   us-west-2
+      AWS_ROLE_ARN:                 arn:aws:iam::208536326202:role/EBSCSIDriverRoleusual
+      AWS_WEB_IDENTITY_TOKEN_FILE:  /var/run/secrets/eks.amazonaws.com/serviceaccount/token
+    Mounts:
+      /var/lib/csi/sockets/pluginproxy/ from socket-dir (rw)
+      /var/run/secrets/eks.amazonaws.com/serviceaccount from aws-iam-token (ro)
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-b2wg2 (ro)
+  csi-resizer:
+    Container ID:  containerd://4702105ca358efa93ae1192151228d3a40b6815a8956da47e4d8421c1750d18e
+    Image:         public.ecr.aws/eks-distro/kubernetes-csi/external-resizer:v1.9.2-eks-1-28-9
+    Image ID:      602401143452.dkr.ecr.us-west-2.amazonaws.com/eks/csi-resizer@sha256:bd952b912fcbc4031dec8b1d4f0c929e7cdb7b9facadb5e0c97644b51fe3a1d2
+    Port:          <none>
+    Host Port:     <none>
+    Args:
+      --timeout=60s
+      --csi-address=$(ADDRESS)
+      --v=2
+      --handle-volume-inuse-error=false
+      --leader-election=true
+      --kube-api-qps=20
+      --kube-api-burst=100
+      --workers=100
+    State:          Running
+      Started:      Thu, 14 Dec 2023 02:06:50 +0000
+    Ready:          True
+    Restart Count:  0
+    Limits:
+      memory:  256Mi
+    Requests:
+      cpu:     10m
+      memory:  40Mi
+    Environment:
+      ADDRESS:                      /var/lib/csi/sockets/pluginproxy/csi.sock
+      AWS_STS_REGIONAL_ENDPOINTS:   regional
+      AWS_DEFAULT_REGION:           us-west-2
+      AWS_REGION:                   us-west-2
+      AWS_ROLE_ARN:                 arn:aws:iam::208536326202:role/EBSCSIDriverRoleusual
+      AWS_WEB_IDENTITY_TOKEN_FILE:  /var/run/secrets/eks.amazonaws.com/serviceaccount/token
+    Mounts:
+      /var/lib/csi/sockets/pluginproxy/ from socket-dir (rw)
+      /var/run/secrets/eks.amazonaws.com/serviceaccount from aws-iam-token (ro)
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-b2wg2 (ro)
+  liveness-probe:
+    Container ID:  containerd://f0a6dc4ee8769ec632b974b5a7d1a92b002e0b7d11bb10dd88c29d862a30baa5
+    Image:         public.ecr.aws/eks-distro/kubernetes-csi/livenessprobe:v2.11.0-eks-1-28-9
+    Image ID:      602401143452.dkr.ecr.us-west-2.amazonaws.com/eks/livenessprobe@sha256:c4dc90035920d45404f938ec6f0ee1ed6872d1a0892669b27746fbdb3846ab82
+    Port:          <none>
+    Host Port:     <none>
+    Args:
+      --csi-address=/csi/csi.sock
+    State:          Running
+      Started:      Thu, 14 Dec 2023 02:06:50 +0000
+    Ready:          True
+    Restart Count:  0
+    Limits:
+      memory:  256Mi
+    Requests:
+      cpu:     10m
+      memory:  40Mi
+    Environment:
+      AWS_STS_REGIONAL_ENDPOINTS:   regional
+      AWS_DEFAULT_REGION:           us-west-2
+      AWS_REGION:                   us-west-2
+      AWS_ROLE_ARN:                 arn:aws:iam::208536326202:role/EBSCSIDriverRoleusual
+      AWS_WEB_IDENTITY_TOKEN_FILE:  /var/run/secrets/eks.amazonaws.com/serviceaccount/token
+    Mounts:
+      /csi from socket-dir (rw)
+      /var/run/secrets/eks.amazonaws.com/serviceaccount from aws-iam-token (ro)
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-b2wg2 (ro)
+Conditions:
+  Type              Status
+  Initialized       True
+  Ready             True
+  ContainersReady   True
+  PodScheduled      True
+Volumes:
+  aws-iam-token:
+    Type:                    Projected (a volume that contains injected data from multiple sources)
+    TokenExpirationSeconds:  86400
+  socket-dir:
+    Type:       EmptyDir (a temporary directory that shares a pod's lifetime)
+    Medium:
+    SizeLimit:  <unset>
+  kube-api-access-b2wg2:
+    Type:                    Projected (a volume that contains injected data from multiple sources)
+    TokenExpirationSeconds:  3607
+    ConfigMapName:           kube-root-ca.crt
+    ConfigMapOptional:       <nil>
+    DownwardAPI:             true
+QoS Class:                   Burstable
+Node-Selectors:              kubernetes.io/os=linux
+Tolerations:                 :NoExecute op=Exists for 300s
+                             CriticalAddonsOnly op=Exists
+Events:
+  Type    Reason     Age                From               Message
+  ----    ------     ----               ----               -------
+  Normal  Scheduled  48m                default-scheduler  Successfully assigned kube-system/ebs-csi-controller-dcdd5c665-bp7hc to ip-192-168-82-154.us-west-2.compute.internal
+  Normal  Started    48m                kubelet            Started container csi-snapshotter
+  Normal  Started    48m                kubelet            Started container ebs-plugin
+  Normal  Pulled     48m                kubelet            Container image "public.ecr.aws/eks-distro/kubernetes-csi/external-snapshotter/csi-snapshotter:v6.3.2-eks-1-28-9" already present on machine
+  Normal  Created    48m                kubelet            Created container csi-snapshotter
+  Normal  Created    48m                kubelet            Created container csi-provisioner
+  Normal  Started    48m                kubelet            Started container csi-provisioner
+  Normal  Created    48m                kubelet            Created container liveness-probe
+  Normal  Pulled     48m                kubelet            Container image "public.ecr.aws/eks-distro/kubernetes-csi/livenessprobe:v2.11.0-eks-1-28-9" already present on machine
+  Normal  Started    48m                kubelet            Started container liveness-probe
+  Normal  Created    48m                kubelet            Created container ebs-plugin
+  Normal  Pulled     48m                kubelet            Container image "public.ecr.aws/eks-distro/kubernetes-csi/external-provisioner:v3.6.2-eks-1-28-9" already present on machine
+  Normal  Pulled     48m                kubelet            Container image "public.ecr.aws/ebs-csi-driver/aws-ebs-csi-driver:v1.25.0" already present on machine
+  Normal  Pulled     48m                kubelet            Container image "public.ecr.aws/eks-distro/kubernetes-csi/external-resizer:v1.9.2-eks-1-28-9" already present on machine
+  Normal  Created    48m                kubelet            Created container csi-resizer
+  Normal  Started    48m                kubelet            Started container csi-resizer
+  Normal  Created    67s (x2 over 48m)  kubelet            Created container csi-attacher
+  Normal  Pulled     67s (x2 over 48m)  kubelet            Container image "public.ecr.aws/eks-distro/kubernetes-csi/external-attacher:v4.4.2-eks-1-28-9" already present on machine
+  Normal  Started    67s (x2 over 48m)  kubelet            Started container csi-attacher
+#❯ kc describe -n kube-system pod/ebs-csi-controller-dcdd5c665-ftdbj
+Name:                 ebs-csi-controller-dcdd5c665-ftdbj
+Namespace:            kube-system
+Priority:             2000000000
+Priority Class Name:  system-cluster-critical
+Service Account:      ebs-csi-controller-sa
+Node:                 ip-192-168-45-43.us-west-2.compute.internal/192.168.45.43
+Start Time:           Thu, 14 Dec 2023 02:06:49 +0000
+Labels:               app=ebs-csi-controller
+                      app.kubernetes.io/component=csi-driver
+                      app.kubernetes.io/instance=aws-ebs-csi-driver
+                      app.kubernetes.io/managed-by=Helm
+                      app.kubernetes.io/name=aws-ebs-csi-driver
+                      app.kubernetes.io/version=1.25.0
+                      helm.sh/chart=aws-ebs-csi-driver-2.25.0
+                      pod-template-hash=dcdd5c665
+Annotations:          <none>
+Status:               Running
+IP:                   192.168.59.100
+IPs:
+  IP:           192.168.59.100
+Controlled By:  ReplicaSet/ebs-csi-controller-dcdd5c665
+Containers:
+  ebs-plugin:
+    Container ID:  containerd://778dea711275587288fa2288c477e54f20bc28167f471d47fdc3fb053e19e135
+    Image:         public.ecr.aws/ebs-csi-driver/aws-ebs-csi-driver:v1.25.0
+    Image ID:      public.ecr.aws/ebs-csi-driver/aws-ebs-csi-driver@sha256:b85fac6ddea18044a217aa5a64c2fa5abdcd92f1c5345bac196c60dc6ab074fc
+    Port:          9808/TCP
+    Host Port:     0/TCP
+    Args:
+      controller
+      --endpoint=$(CSI_ENDPOINT)
+      --batching=true
+      --logging-format=text
+      --user-agent-extra=helm
+      --v=2
+    State:          Running
+      Started:      Thu, 14 Dec 2023 02:06:50 +0000
+    Ready:          True
+    Restart Count:  0
+    Limits:
+      memory:  256Mi
+    Requests:
+      cpu:      10m
+      memory:   40Mi
+    Liveness:   http-get http://:healthz/healthz delay=10s timeout=3s period=10s #success=1 #failure=5
+    Readiness:  http-get http://:healthz/healthz delay=10s timeout=3s period=10s #success=1 #failure=5
+    Environment:
+      CSI_ENDPOINT:                 unix:///var/lib/csi/sockets/pluginproxy/csi.sock
+      CSI_NODE_NAME:                 (v1:spec.nodeName)
+      AWS_ACCESS_KEY_ID:            <set to the key 'key_id' in secret 'aws-secret'>      Optional: true
+      AWS_SECRET_ACCESS_KEY:        <set to the key 'access_key' in secret 'aws-secret'>  Optional: true
+      AWS_EC2_ENDPOINT:             <set to the key 'endpoint' of config map 'aws-meta'>  Optional: true
+      AWS_STS_REGIONAL_ENDPOINTS:   regional
+      AWS_DEFAULT_REGION:           us-west-2
+      AWS_REGION:                   us-west-2
+      AWS_ROLE_ARN:                 arn:aws:iam::208536326202:role/EBSCSIDriverRoleusual
+      AWS_WEB_IDENTITY_TOKEN_FILE:  /var/run/secrets/eks.amazonaws.com/serviceaccount/token
+    Mounts:
+      /var/lib/csi/sockets/pluginproxy/ from socket-dir (rw)
+      /var/run/secrets/eks.amazonaws.com/serviceaccount from aws-iam-token (ro)
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-2c8xz (ro)
+  csi-provisioner:
+    Container ID:  containerd://9367339a030c79cf2ee8e40373650e18b92f09ea06e59093709dd660a9a1892a
+    Image:         public.ecr.aws/eks-distro/kubernetes-csi/external-provisioner:v3.6.2-eks-1-28-9
+    Image ID:      602401143452.dkr.ecr.us-west-2.amazonaws.com/eks/csi-provisioner@sha256:8e523a788fffc72359e7177c2b5110a0193fcbb910eb13d489959d4e5da4844c
+    Port:          <none>
+    Host Port:     <none>
+    Args:
+      --timeout=60s
+      --csi-address=$(ADDRESS)
+      --v=2
+      --feature-gates=Topology=true
+      --extra-create-metadata
+      --leader-election=true
+      --default-fstype=ext4
+      --kube-api-qps=20
+      --kube-api-burst=100
+      --worker-threads=100
+    State:          Running
+      Started:      Thu, 14 Dec 2023 02:53:18 +0000
+    Last State:     Terminated
+      Reason:       Error
+      Message:      Lost connection to CSI driver, exiting
+      Exit Code:    1
+      Started:      Thu, 14 Dec 2023 02:06:50 +0000
+      Finished:     Thu, 14 Dec 2023 02:53:17 +0000
+    Ready:          True
+    Restart Count:  1
+    Limits:
+      memory:  256Mi
+    Requests:
+      cpu:     10m
+      memory:  40Mi
+    Environment:
+      ADDRESS:                      /var/lib/csi/sockets/pluginproxy/csi.sock
+      AWS_STS_REGIONAL_ENDPOINTS:   regional
+      AWS_DEFAULT_REGION:           us-west-2
+      AWS_REGION:                   us-west-2
+      AWS_ROLE_ARN:                 arn:aws:iam::208536326202:role/EBSCSIDriverRoleusual
+      AWS_WEB_IDENTITY_TOKEN_FILE:  /var/run/secrets/eks.amazonaws.com/serviceaccount/token
+    Mounts:
+      /var/lib/csi/sockets/pluginproxy/ from socket-dir (rw)
+      /var/run/secrets/eks.amazonaws.com/serviceaccount from aws-iam-token (ro)
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-2c8xz (ro)
+  csi-attacher:
+    Container ID:  containerd://d4a050d96d6d3109f3be052e115d204bf9e8d9ddedcd02638756d4b01d819ba3
+    Image:         public.ecr.aws/eks-distro/kubernetes-csi/external-attacher:v4.4.2-eks-1-28-9
+    Image ID:      602401143452.dkr.ecr.us-west-2.amazonaws.com/eks/csi-attacher@sha256:aebbe79854c2420c08c1dc6afcc96e24c35cd2b29b617396f07df9155b6ca328
+    Port:          <none>
+    Host Port:     <none>
+    Args:
+      --timeout=60s
+      --csi-address=$(ADDRESS)
+      --v=2
+      --leader-election=true
+      --kube-api-qps=20
+      --kube-api-burst=100
+      --worker-threads=100
+    State:          Running
+      Started:      Thu, 14 Dec 2023 02:06:50 +0000
+    Ready:          True
+    Restart Count:  0
+    Limits:
+      memory:  256Mi
+    Requests:
+      cpu:     10m
+      memory:  40Mi
+    Environment:
+      ADDRESS:                      /var/lib/csi/sockets/pluginproxy/csi.sock
+      AWS_STS_REGIONAL_ENDPOINTS:   regional
+      AWS_DEFAULT_REGION:           us-west-2
+      AWS_REGION:                   us-west-2
+      AWS_ROLE_ARN:                 arn:aws:iam::208536326202:role/EBSCSIDriverRoleusual
+      AWS_WEB_IDENTITY_TOKEN_FILE:  /var/run/secrets/eks.amazonaws.com/serviceaccount/token
+    Mounts:
+      /var/lib/csi/sockets/pluginproxy/ from socket-dir (rw)
+      /var/run/secrets/eks.amazonaws.com/serviceaccount from aws-iam-token (ro)
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-2c8xz (ro)
+  csi-snapshotter:
+    Container ID:  containerd://804d5ef988be91567c536408f36575110f6d57ebf6a120fec7a47b75bcd41305
+    Image:         public.ecr.aws/eks-distro/kubernetes-csi/external-snapshotter/csi-snapshotter:v6.3.2-eks-1-28-9
+    Image ID:      602401143452.dkr.ecr.us-west-2.amazonaws.com/eks/csi-snapshotter@sha256:d89d10ee97b46acf4f7b43a030b87752a2f1a72793035ee60dd10589a8c1c21a
+    Port:          <none>
+    Host Port:     <none>
+    Args:
+      --csi-address=$(ADDRESS)
+      --leader-election=true
+      --extra-create-metadata
+      --kube-api-qps=20
+      --kube-api-burst=100
+      --worker-threads=100
+    State:          Running
+      Started:      Thu, 14 Dec 2023 02:06:50 +0000
+    Ready:          True
+    Restart Count:  0
+    Limits:
+      memory:  256Mi
+    Requests:
+      cpu:     10m
+      memory:  40Mi
+    Environment:
+      ADDRESS:                      /var/lib/csi/sockets/pluginproxy/csi.sock
+      AWS_STS_REGIONAL_ENDPOINTS:   regional
+      AWS_DEFAULT_REGION:           us-west-2
+      AWS_REGION:                   us-west-2
+      AWS_ROLE_ARN:                 arn:aws:iam::208536326202:role/EBSCSIDriverRoleusual
+      AWS_WEB_IDENTITY_TOKEN_FILE:  /var/run/secrets/eks.amazonaws.com/serviceaccount/token
+    Mounts:
+      /var/lib/csi/sockets/pluginproxy/ from socket-dir (rw)
+      /var/run/secrets/eks.amazonaws.com/serviceaccount from aws-iam-token (ro)
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-2c8xz (ro)
+  csi-resizer:
+    Container ID:  containerd://cd62c6854c2c70654347df6899ffa4ccbca3ac9a41ebf9f34b826a47abc3b0dc
+    Image:         public.ecr.aws/eks-distro/kubernetes-csi/external-resizer:v1.9.2-eks-1-28-9
+    Image ID:      602401143452.dkr.ecr.us-west-2.amazonaws.com/eks/csi-resizer@sha256:bd952b912fcbc4031dec8b1d4f0c929e7cdb7b9facadb5e0c97644b51fe3a1d2
+    Port:          <none>
+    Host Port:     <none>
+    Args:
+      --timeout=60s
+      --csi-address=$(ADDRESS)
+      --v=2
+      --handle-volume-inuse-error=false
+      --leader-election=true
+      --kube-api-qps=20
+      --kube-api-burst=100
+      --workers=100
+    State:          Running
+      Started:      Thu, 14 Dec 2023 02:06:50 +0000
+    Ready:          True
+    Restart Count:  0
+    Limits:
+      memory:  256Mi
+    Requests:
+      cpu:     10m
+      memory:  40Mi
+    Environment:
+      ADDRESS:                      /var/lib/csi/sockets/pluginproxy/csi.sock
+      AWS_STS_REGIONAL_ENDPOINTS:   regional
+      AWS_DEFAULT_REGION:           us-west-2
+      AWS_REGION:                   us-west-2
+      AWS_ROLE_ARN:                 arn:aws:iam::208536326202:role/EBSCSIDriverRoleusual
+      AWS_WEB_IDENTITY_TOKEN_FILE:  /var/run/secrets/eks.amazonaws.com/serviceaccount/token
+    Mounts:
+      /var/lib/csi/sockets/pluginproxy/ from socket-dir (rw)
+      /var/run/secrets/eks.amazonaws.com/serviceaccount from aws-iam-token (ro)
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-2c8xz (ro)
+  liveness-probe:
+    Container ID:  containerd://3d9d7f44e3327bc694671a1640a8ce088bb2e381b8e95a39ff8b3c36466957e2
+    Image:         public.ecr.aws/eks-distro/kubernetes-csi/livenessprobe:v2.11.0-eks-1-28-9
+    Image ID:      602401143452.dkr.ecr.us-west-2.amazonaws.com/eks/livenessprobe@sha256:c4dc90035920d45404f938ec6f0ee1ed6872d1a0892669b27746fbdb3846ab82
+    Port:          <none>
+    Host Port:     <none>
+    Args:
+      --csi-address=/csi/csi.sock
+    State:          Running
+      Started:      Thu, 14 Dec 2023 02:06:50 +0000
+    Ready:          True
+    Restart Count:  0
+    Limits:
+      memory:  256Mi
+    Requests:
+      cpu:     10m
+      memory:  40Mi
+    Environment:
+      AWS_STS_REGIONAL_ENDPOINTS:   regional
+      AWS_DEFAULT_REGION:           us-west-2
+      AWS_REGION:                   us-west-2
+      AWS_ROLE_ARN:                 arn:aws:iam::208536326202:role/EBSCSIDriverRoleusual
+      AWS_WEB_IDENTITY_TOKEN_FILE:  /var/run/secrets/eks.amazonaws.com/serviceaccount/token
+    Mounts:
+      /csi from socket-dir (rw)
+      /var/run/secrets/eks.amazonaws.com/serviceaccount from aws-iam-token (ro)
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-2c8xz (ro)
+Conditions:
+  Type              Status
+  Initialized       True
+  Ready             True
+  ContainersReady   True
+  PodScheduled      True
+Volumes:
+  aws-iam-token:
+    Type:                    Projected (a volume that contains injected data from multiple sources)
+    TokenExpirationSeconds:  86400
+  socket-dir:
+    Type:       EmptyDir (a temporary directory that shares a pod's lifetime)
+    Medium:
+    SizeLimit:  <unset>
+  kube-api-access-2c8xz:
+    Type:                    Projected (a volume that contains injected data from multiple sources)
+    TokenExpirationSeconds:  3607
+    ConfigMapName:           kube-root-ca.crt
+    ConfigMapOptional:       <nil>
+    DownwardAPI:             true
+QoS Class:                   Burstable
+Node-Selectors:              kubernetes.io/os=linux
+Tolerations:                 :NoExecute op=Exists for 300s
+                             CriticalAddonsOnly op=Exists
+Events:
+  Type    Reason     Age                 From               Message
+  ----    ------     ----                ----               -------
+  Normal  Scheduled  48m                 default-scheduler  Successfully assigned kube-system/ebs-csi-controller-dcdd5c665-ftdbj to ip-192-168-45-43.us-west-2.compute.internal
+  Normal  Started    48m                 kubelet            Started container csi-snapshotter
+  Normal  Created    48m                 kubelet            Created container csi-resizer
+  Normal  Pulled     48m                 kubelet            Container image "public.ecr.aws/eks-distro/kubernetes-csi/external-snapshotter/csi-snapshotter:v6.3.2-eks-1-28-9" already present on machine
+  Normal  Created    48m                 kubelet            Created container csi-snapshotter
+  Normal  Started    48m                 kubelet            Started container csi-attacher
+  Normal  Created    48m                 kubelet            Created container liveness-probe
+  Normal  Pulled     48m                 kubelet            Container image "public.ecr.aws/eks-distro/kubernetes-csi/external-attacher:v4.4.2-eks-1-28-9" already present on machine
+  Normal  Created    48m                 kubelet            Created container csi-attacher
+  Normal  Started    48m                 kubelet            Started container liveness-probe
+  Normal  Started    48m                 kubelet            Started container ebs-plugin
+  Normal  Pulled     48m                 kubelet            Container image "public.ecr.aws/eks-distro/kubernetes-csi/livenessprobe:v2.11.0-eks-1-28-9" already present on machine
+  Normal  Pulled     48m                 kubelet            Container image "public.ecr.aws/ebs-csi-driver/aws-ebs-csi-driver:v1.25.0" already present on machine
+  Normal  Pulled     48m                 kubelet            Container image "public.ecr.aws/eks-distro/kubernetes-csi/external-resizer:v1.9.2-eks-1-28-9" already present on machine
+  Normal  Created    48m                 kubelet            Created container ebs-plugin
+  Normal  Started    48m                 kubelet            Started container csi-resizer
+  Normal  Pulled     106s (x2 over 48m)  kubelet            Container image "public.ecr.aws/eks-distro/kubernetes-csi/external-provisioner:v3.6.2-eks-1-28-9" already present on machine
+  Normal  Started    106s (x2 over 48m)  kubelet            Started container csi-provisioner
+  Normal  Created    106s (x2 over 48m)  kubelet            Created container csi-provisioner

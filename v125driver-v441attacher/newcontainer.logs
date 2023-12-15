@@ -1,0 +1,59 @@
+I1214 01:06:24.374401       1 driver.go:78] "Driver Information" Driver="ebs.csi.aws.com" Version="v1.25.0"
+I1214 01:06:24.374474       1 controller.go:92] "batching" status=true
+I1214 01:06:46.672247       1 controller.go:419] "ControllerPublishVolume: attaching" volumeID="vol-091a2d8fe9043be0d" nodeID="i-0924703178526c0a9"
+I1214 01:06:48.221823       1 controller.go:424] "ControllerPublishVolume: attached" volumeID="vol-091a2d8fe9043be0d" nodeID="i-0924703178526c0a9" devicePath="/dev/xvdaa"
+I1214 01:08:09.623364       1 controller.go:465] "ControllerUnpublishVolume: detaching" volumeID="vol-091a2d8fe9043be0d" nodeID="i-0924703178526c0a9"
+I1214 01:08:11.037765       1 cloud.go:862] "Waiting for volume state" volumeID="vol-091a2d8fe9043be0d" actual="detaching" desired="detached"
+I1214 01:08:13.114210       1 controller.go:473] "ControllerUnpublishVolume: detached" volumeID="vol-091a2d8fe9043be0d" nodeID="i-0924703178526c0a9"
+I1214 01:51:39.730843       1 controller.go:419] "ControllerPublishVolume: attaching" volumeID="vol-0d67352eb85d908ae" nodeID="i-0924703178526c0a9"
+I1214 01:51:41.199959       1 controller.go:424] "ControllerPublishVolume: attached" volumeID="vol-0d67352eb85d908ae" nodeID="i-0924703178526c0a9" devicePath="/dev/xvdaa"
+W1214 01:51:17.182317       1 feature_gate.go:241] Setting GA feature gate Topology=true. It will be removed in a future release.
+I1214 01:51:17.182352       1 feature_gate.go:249] feature gates: &{map[Topology:true]}
+I1214 01:51:17.182433       1 csi-provisioner.go:154] Version: v3.6.2
+I1214 01:51:17.182447       1 csi-provisioner.go:177] Building kube configs for running in cluster...
+I1214 01:51:17.184851       1 common.go:138] Probing CSI driver for readiness
+I1214 01:51:17.186847       1 csi-provisioner.go:230] Detected CSI driver ebs.csi.aws.com
+I1214 01:51:17.186866       1 csi-provisioner.go:240] Supports migration from in-tree plugin: kubernetes.io/aws-ebs
+I1214 01:51:17.187489       1 common.go:138] Probing CSI driver for readiness
+I1214 01:51:17.188662       1 csi-provisioner.go:299] CSI driver supports PUBLISH_UNPUBLISH_VOLUME, watching VolumeAttachments
+I1214 01:51:17.188997       1 controller.go:732] Using saving PVs to API server in background
+I1214 01:51:17.189667       1 leaderelection.go:250] attempting to acquire leader lease kube-system/ebs-csi-aws-com...
+I1214 01:51:34.295748       1 leaderelection.go:260] successfully acquired lease kube-system/ebs-csi-aws-com
+I1214 01:51:34.295906       1 leader_election.go:178] became leader, starting
+I1214 01:51:34.396955       1 controller.go:811] Starting provisioner controller ebs.csi.aws.com_ebs-csi-controller-5f8568d7cc-s5fs7_db051b6a-dd0e-4271-8136-a214c6c65c29!
+I1214 01:51:34.397005       1 volume_store.go:97] Starting save volume queue
+I1214 01:51:34.497880       1 controller.go:1366] provision "default/ebs-claim" class "ebs-sc": started
+I1214 01:51:34.498455       1 controller.go:860] Started provisioner controller ebs.csi.aws.com_ebs-csi-controller-5f8568d7cc-s5fs7_db051b6a-dd0e-4271-8136-a214c6c65c29!
+I1214 01:51:34.499494       1 event.go:298] Event(v1.ObjectReference{Kind:"PersistentVolumeClaim", Namespace:"default", Name:"ebs-claim", UID:"3ed0349f-79ef-4cbb-8f7f-3636a5ada5e0", APIVersion:"v1", ResourceVersion:"13389", FieldPath:""}): type: 'Normal' reason: 'Provisioning' External provisioner is provisioning volume for claim "default/ebs-claim"
+I1214 01:51:38.797295       1 controller.go:923] successfully created PV pvc-3ed0349f-79ef-4cbb-8f7f-3636a5ada5e0 for PVC ebs-claim and csi volume name vol-0d67352eb85d908ae
+I1214 01:51:38.797331       1 controller.go:1449] provision "default/ebs-claim" class "ebs-sc": volume "pvc-3ed0349f-79ef-4cbb-8f7f-3636a5ada5e0" provisioned
+I1214 01:51:38.797340       1 controller.go:1462] provision "default/ebs-claim" class "ebs-sc": succeeded
+I1214 01:51:38.805669       1 event.go:298] Event(v1.ObjectReference{Kind:"PersistentVolumeClaim", Namespace:"default", Name:"ebs-claim", UID:"3ed0349f-79ef-4cbb-8f7f-3636a5ada5e0", APIVersion:"v1", ResourceVersion:"13389", FieldPath:""}): type: 'Normal' reason: 'ProvisioningSucceeded' Successfully provisioned volume pvc-3ed0349f-79ef-4cbb-8f7f-3636a5ada5e0
+I1214 01:06:27.740596       1 main.go:97] Version: v4.4.1
+I1214 01:06:27.742457       1 common.go:138] Probing CSI driver for readiness
+I1214 01:06:27.746144       1 main.go:154] CSI driver name: "ebs.csi.aws.com"
+I1214 01:06:27.747767       1 common.go:138] Probing CSI driver for readiness
+I1214 01:06:27.749533       1 main.go:230] CSI driver supports ControllerPublishUnpublish, using real CSI handler
+I1214 01:06:27.749954       1 leaderelection.go:250] attempting to acquire leader lease kube-system/external-attacher-leader-ebs-csi-aws-com...
+I1214 01:06:27.770489       1 leaderelection.go:260] successfully acquired lease kube-system/external-attacher-leader-ebs-csi-aws-com
+I1214 01:06:27.771083       1 leader_election.go:178] became leader, starting
+I1214 01:06:27.771111       1 controller.go:130] Starting CSI attacher
+I1214 01:06:46.653006       1 csi_handler.go:251] Attaching "csi-39de4be5af524cb5679ad0e07de82b800ee5f4589fb08c1f3229df5e25f51c4d"
+I1214 01:06:48.222222       1 csi_handler.go:264] Attached "csi-39de4be5af524cb5679ad0e07de82b800ee5f4589fb08c1f3229df5e25f51c4d"
+I1214 01:08:09.622840       1 csi_handler.go:282] Detaching "csi-39de4be5af524cb5679ad0e07de82b800ee5f4589fb08c1f3229df5e25f51c4d"
+I1214 01:08:13.114563       1 csi_handler.go:581] Detached "csi-39de4be5af524cb5679ad0e07de82b800ee5f4589fb08c1f3229df5e25f51c4d"
+I1214 01:08:14.896529       1 csi_handler.go:706] Removed finalizer from PV "pvc-b081e2bd-b50d-4331-923e-0451618e6521"
+I1214 01:51:39.710759       1 csi_handler.go:251] Attaching "csi-8461a93d54f382d9a3b23c1a51112a7e7a2ea89304cade2f5e924ef6564f9db6"
+I1214 01:51:41.200207       1 csi_handler.go:264] Attached "csi-8461a93d54f382d9a3b23c1a51112a7e7a2ea89304cade2f5e924ef6564f9db6"
+I1214 01:06:28.825322       1 main.go:93] Version : v1.9.2
+I1214 01:06:28.825363       1 feature_gate.go:249] feature gates: &{map[]}
+I1214 01:06:28.826775       1 common.go:138] Probing CSI driver for readiness
+I1214 01:06:28.830838       1 main.go:141] CSI driver name: "ebs.csi.aws.com"
+I1214 01:06:28.831601       1 common.go:138] Probing CSI driver for readiness
+I1214 01:06:28.836092       1 leaderelection.go:250] attempting to acquire leader lease kube-system/external-resizer-ebs-csi-aws-com...
+I1214 01:06:28.858609       1 leaderelection.go:260] successfully acquired lease kube-system/external-resizer-ebs-csi-aws-com
+I1214 01:06:28.859474       1 leader_election.go:178] became leader, starting
+I1214 01:06:28.859503       1 controller.go:255] Starting external resizer ebs.csi.aws.com
+I1214 01:06:28.890569       1 main.go:149] calling CSI driver to discover driver name
+I1214 01:06:28.892615       1 main.go:155] CSI driver name: "ebs.csi.aws.com"
+I1214 01:06:28.892641       1 main.go:183] ServeMux listening at "0.0.0.0:9808"

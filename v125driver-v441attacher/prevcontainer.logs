@@ -1,0 +1,48 @@
+W1214 01:06:25.950469       1 feature_gate.go:241] Setting GA feature gate Topology=true. It will be removed in a future release.
+I1214 01:06:25.950509       1 feature_gate.go:249] feature gates: &{map[Topology:true]}
+I1214 01:06:25.950535       1 csi-provisioner.go:154] Version: v3.6.2
+I1214 01:06:25.950545       1 csi-provisioner.go:177] Building kube configs for running in cluster...
+I1214 01:06:25.953209       1 common.go:138] Probing CSI driver for readiness
+I1214 01:06:25.955902       1 csi-provisioner.go:230] Detected CSI driver ebs.csi.aws.com
+I1214 01:06:25.955922       1 csi-provisioner.go:240] Supports migration from in-tree plugin: kubernetes.io/aws-ebs
+I1214 01:06:25.956421       1 common.go:138] Probing CSI driver for readiness
+I1214 01:06:25.958304       1 csi-provisioner.go:299] CSI driver supports PUBLISH_UNPUBLISH_VOLUME, watching VolumeAttachments
+I1214 01:06:25.958740       1 controller.go:732] Using saving PVs to API server in background
+I1214 01:06:25.959048       1 leaderelection.go:250] attempting to acquire leader lease kube-system/ebs-csi-aws-com...
+I1214 01:06:25.981570       1 leaderelection.go:260] successfully acquired lease kube-system/ebs-csi-aws-com
+I1214 01:06:25.982367       1 leader_election.go:178] became leader, starting
+I1214 01:06:26.083540       1 controller.go:811] Starting provisioner controller ebs.csi.aws.com_ebs-csi-controller-5f8568d7cc-s5fs7_f34e7554-25d6-481b-ae52-7f1529bd911c!
+I1214 01:06:26.083594       1 volume_store.go:97] Starting save volume queue
+I1214 01:06:26.184270       1 controller.go:860] Started provisioner controller ebs.csi.aws.com_ebs-csi-controller-5f8568d7cc-s5fs7_f34e7554-25d6-481b-ae52-7f1529bd911c!
+I1214 01:06:41.615275       1 controller.go:1366] provision "default/ebs-claim" class "ebs-sc": started
+I1214 01:06:41.616155       1 event.go:298] Event(v1.ObjectReference{Kind:"PersistentVolumeClaim", Namespace:"default", Name:"ebs-claim", UID:"b081e2bd-b50d-4331-923e-0451618e6521", APIVersion:"v1", ResourceVersion:"5108", FieldPath:""}): type: 'Normal' reason: 'Provisioning' External provisioner is provisioning volume for claim "default/ebs-claim"
+I1214 01:06:46.008565       1 controller.go:923] successfully created PV pvc-b081e2bd-b50d-4331-923e-0451618e6521 for PVC ebs-claim and csi volume name vol-091a2d8fe9043be0d
+I1214 01:06:46.008595       1 controller.go:1449] provision "default/ebs-claim" class "ebs-sc": volume "pvc-b081e2bd-b50d-4331-923e-0451618e6521" provisioned
+I1214 01:06:46.008607       1 controller.go:1462] provision "default/ebs-claim" class "ebs-sc": succeeded
+I1214 01:06:46.018242       1 event.go:298] Event(v1.ObjectReference{Kind:"PersistentVolumeClaim", Namespace:"default", Name:"ebs-claim", UID:"b081e2bd-b50d-4331-923e-0451618e6521", APIVersion:"v1", ResourceVersion:"5108", FieldPath:""}): type: 'Normal' reason: 'ProvisioningSucceeded' Successfully provisioned volume pvc-b081e2bd-b50d-4331-923e-0451618e6521
+I1214 01:08:07.746129       1 controller.go:1509] delete "pvc-b081e2bd-b50d-4331-923e-0451618e6521": started
+I1214 01:08:07.746169       1 controller.go:1279] volume pvc-b081e2bd-b50d-4331-923e-0451618e6521 does not need any deletion secrets
+E1214 01:08:07.746193       1 controller.go:1519] delete "pvc-b081e2bd-b50d-4331-923e-0451618e6521": volume deletion failed: persistentvolume pvc-b081e2bd-b50d-4331-923e-0451618e6521 is still attached to node ip-192-168-27-88.us-west-2.compute.internal
+W1214 01:08:07.746230       1 controller.go:989] Retrying syncing volume "pvc-b081e2bd-b50d-4331-923e-0451618e6521", failure 0
+E1214 01:08:07.746259       1 controller.go:1007] error syncing volume "pvc-b081e2bd-b50d-4331-923e-0451618e6521": persistentvolume pvc-b081e2bd-b50d-4331-923e-0451618e6521 is still attached to node ip-192-168-27-88.us-west-2.compute.internal
+I1214 01:08:07.746323       1 event.go:298] Event(v1.ObjectReference{Kind:"PersistentVolume", Namespace:"", Name:"pvc-b081e2bd-b50d-4331-923e-0451618e6521", UID:"0f7714e9-f426-4693-b7e6-f8376b80c30c", APIVersion:"v1", ResourceVersion:"5415", FieldPath:""}): type: 'Warning' reason: 'VolumeFailedDelete' persistentvolume pvc-b081e2bd-b50d-4331-923e-0451618e6521 is still attached to node ip-192-168-27-88.us-west-2.compute.internal
+I1214 01:08:08.746593       1 controller.go:1509] delete "pvc-b081e2bd-b50d-4331-923e-0451618e6521": started
+I1214 01:08:08.746641       1 controller.go:1279] volume pvc-b081e2bd-b50d-4331-923e-0451618e6521 does not need any deletion secrets
+E1214 01:08:08.746685       1 controller.go:1519] delete "pvc-b081e2bd-b50d-4331-923e-0451618e6521": volume deletion failed: persistentvolume pvc-b081e2bd-b50d-4331-923e-0451618e6521 is still attached to node ip-192-168-27-88.us-west-2.compute.internal
+W1214 01:08:08.746718       1 controller.go:989] Retrying syncing volume "pvc-b081e2bd-b50d-4331-923e-0451618e6521", failure 1
+E1214 01:08:08.746741       1 controller.go:1007] error syncing volume "pvc-b081e2bd-b50d-4331-923e-0451618e6521": persistentvolume pvc-b081e2bd-b50d-4331-923e-0451618e6521 is still attached to node ip-192-168-27-88.us-west-2.compute.internal
+I1214 01:08:08.746930       1 event.go:298] Event(v1.ObjectReference{Kind:"PersistentVolume", Namespace:"", Name:"pvc-b081e2bd-b50d-4331-923e-0451618e6521", UID:"0f7714e9-f426-4693-b7e6-f8376b80c30c", APIVersion:"v1", ResourceVersion:"5415", FieldPath:""}): type: 'Warning' reason: 'VolumeFailedDelete' persistentvolume pvc-b081e2bd-b50d-4331-923e-0451618e6521 is still attached to node ip-192-168-27-88.us-west-2.compute.internal
+I1214 01:08:10.747202       1 controller.go:1509] delete "pvc-b081e2bd-b50d-4331-923e-0451618e6521": started
+I1214 01:08:10.747245       1 controller.go:1279] volume pvc-b081e2bd-b50d-4331-923e-0451618e6521 does not need any deletion secrets
+E1214 01:08:10.747269       1 controller.go:1519] delete "pvc-b081e2bd-b50d-4331-923e-0451618e6521": volume deletion failed: persistentvolume pvc-b081e2bd-b50d-4331-923e-0451618e6521 is still attached to node ip-192-168-27-88.us-west-2.compute.internal
+W1214 01:08:10.747295       1 controller.go:989] Retrying syncing volume "pvc-b081e2bd-b50d-4331-923e-0451618e6521", failure 2
+E1214 01:08:10.747310       1 controller.go:1007] error syncing volume "pvc-b081e2bd-b50d-4331-923e-0451618e6521": persistentvolume pvc-b081e2bd-b50d-4331-923e-0451618e6521 is still attached to node ip-192-168-27-88.us-west-2.compute.internal
+I1214 01:08:10.747393       1 event.go:298] Event(v1.ObjectReference{Kind:"PersistentVolume", Namespace:"", Name:"pvc-b081e2bd-b50d-4331-923e-0451618e6521", UID:"0f7714e9-f426-4693-b7e6-f8376b80c30c", APIVersion:"v1", ResourceVersion:"5415", FieldPath:""}): type: 'Warning' reason: 'VolumeFailedDelete' persistentvolume pvc-b081e2bd-b50d-4331-923e-0451618e6521 is still attached to node ip-192-168-27-88.us-west-2.compute.internal
+I1214 01:08:14.748115       1 controller.go:1509] delete "pvc-b081e2bd-b50d-4331-923e-0451618e6521": started
+I1214 01:08:14.748173       1 controller.go:1279] volume pvc-b081e2bd-b50d-4331-923e-0451618e6521 does not need any deletion secrets
+I1214 01:08:14.869521       1 controller.go:1524] delete "pvc-b081e2bd-b50d-4331-923e-0451618e6521": volume deleted
+I1214 01:08:14.880360       1 controller.go:1569] delete "pvc-b081e2bd-b50d-4331-923e-0451618e6521": persistentvolume deleted succeeded
+I1214 01:51:16.620875       1 controller.go:1366] provision "default/ebs-claim" class "ebs-sc": started
+I1214 01:51:16.621173       1 event.go:298] Event(v1.ObjectReference{Kind:"PersistentVolumeClaim", Namespace:"default", Name:"ebs-claim", UID:"3ed0349f-79ef-4cbb-8f7f-3636a5ada5e0", APIVersion:"v1", ResourceVersion:"13389", FieldPath:""}): type: 'Normal' reason: 'Provisioning' External provisioner is provisioning volume for claim "default/ebs-claim"
+E1214 01:51:16.621301       1 connection.go:142] Lost connection to unix:///var/lib/csi/sockets/pluginproxy/csi.sock.
+F1214 01:51:16.621396       1 connection.go:97] Lost connection to CSI driver, exiting

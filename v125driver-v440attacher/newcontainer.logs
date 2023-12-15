@@ -1,0 +1,73 @@
+I1214 00:27:29.009625       1 driver.go:78] "Driver Information" Driver="ebs.csi.aws.com" Version="v1.25.0"
+I1214 00:27:29.009847       1 controller.go:92] "batching" status=true
+W1214 01:06:54.924201       1 feature_gate.go:241] Setting GA feature gate Topology=true. It will be removed in a future release.
+I1214 01:06:54.924252       1 feature_gate.go:249] feature gates: &{map[Topology:true]}
+I1214 01:06:54.924274       1 csi-provisioner.go:154] Version: v3.6.2
+I1214 01:06:54.924283       1 csi-provisioner.go:177] Building kube configs for running in cluster...
+I1214 01:06:54.926694       1 common.go:138] Probing CSI driver for readiness
+I1214 01:06:54.929054       1 csi-provisioner.go:230] Detected CSI driver ebs.csi.aws.com
+I1214 01:06:54.929075       1 csi-provisioner.go:240] Supports migration from in-tree plugin: kubernetes.io/aws-ebs
+I1214 01:06:54.929675       1 common.go:138] Probing CSI driver for readiness
+I1214 01:06:54.930834       1 csi-provisioner.go:299] CSI driver supports PUBLISH_UNPUBLISH_VOLUME, watching VolumeAttachments
+I1214 01:06:54.931198       1 controller.go:732] Using saving PVs to API server in background
+I1214 01:06:54.931698       1 leaderelection.go:250] attempting to acquire leader lease kube-system/ebs-csi-aws-com...
+I1214 01:07:10.607338       1 leaderelection.go:260] successfully acquired lease kube-system/ebs-csi-aws-com
+I1214 01:07:10.607531       1 leader_election.go:178] became leader, starting
+I1214 01:07:10.708052       1 controller.go:811] Starting provisioner controller ebs.csi.aws.com_ebs-csi-controller-6f9df8bccc-h8wv9_a701c768-02d6-4871-b132-fdc1639122eb!
+I1214 01:07:10.708503       1 volume_store.go:97] Starting save volume queue
+I1214 01:07:10.809201       1 controller.go:1366] provision "default/ebs-claim" class "ebs-sc": started
+I1214 01:07:10.809764       1 controller.go:860] Started provisioner controller ebs.csi.aws.com_ebs-csi-controller-6f9df8bccc-h8wv9_a701c768-02d6-4871-b132-fdc1639122eb!
+I1214 01:07:10.810310       1 event.go:298] Event(v1.ObjectReference{Kind:"PersistentVolumeClaim", Namespace:"default", Name:"ebs-claim", UID:"edcb7b20-7ea7-4a53-a15d-3ce454e3aff6", APIVersion:"v1", ResourceVersion:"1228791", FieldPath:""}): type: 'Normal' reason: 'Provisioning' External provisioner is provisioning volume for claim "default/ebs-claim"
+I1214 01:07:15.214397       1 controller.go:923] successfully created PV pvc-edcb7b20-7ea7-4a53-a15d-3ce454e3aff6 for PVC ebs-claim and csi volume name vol-0e83b0a1058f2b7ee
+I1214 01:07:15.214430       1 controller.go:1449] provision "default/ebs-claim" class "ebs-sc": volume "pvc-edcb7b20-7ea7-4a53-a15d-3ce454e3aff6" provisioned
+I1214 01:07:15.214443       1 controller.go:1462] provision "default/ebs-claim" class "ebs-sc": succeeded
+I1214 01:07:15.224186       1 event.go:298] Event(v1.ObjectReference{Kind:"PersistentVolumeClaim", Namespace:"default", Name:"ebs-claim", UID:"edcb7b20-7ea7-4a53-a15d-3ce454e3aff6", APIVersion:"v1", ResourceVersion:"1228791", FieldPath:""}): type: 'Normal' reason: 'ProvisioningSucceeded' Successfully provisioned volume pvc-edcb7b20-7ea7-4a53-a15d-3ce454e3aff6
+I1214 01:08:51.638391       1 controller.go:1509] delete "pvc-edcb7b20-7ea7-4a53-a15d-3ce454e3aff6": started
+I1214 01:08:51.638768       1 controller.go:1279] volume pvc-edcb7b20-7ea7-4a53-a15d-3ce454e3aff6 does not need any deletion secrets
+E1214 01:08:51.638853       1 controller.go:1519] delete "pvc-edcb7b20-7ea7-4a53-a15d-3ce454e3aff6": volume deletion failed: persistentvolume pvc-edcb7b20-7ea7-4a53-a15d-3ce454e3aff6 is still attached to node ip-192-168-82-154.us-west-2.compute.internal
+W1214 01:08:51.638947       1 controller.go:989] Retrying syncing volume "pvc-edcb7b20-7ea7-4a53-a15d-3ce454e3aff6", failure 0
+E1214 01:08:51.639005       1 controller.go:1007] error syncing volume "pvc-edcb7b20-7ea7-4a53-a15d-3ce454e3aff6": persistentvolume pvc-edcb7b20-7ea7-4a53-a15d-3ce454e3aff6 is still attached to node ip-192-168-82-154.us-west-2.compute.internal
+I1214 01:08:51.639073       1 event.go:298] Event(v1.ObjectReference{Kind:"PersistentVolume", Namespace:"", Name:"pvc-edcb7b20-7ea7-4a53-a15d-3ce454e3aff6", UID:"9ef1827f-fe32-4f54-85b9-ab117a419ae9", APIVersion:"v1", ResourceVersion:"1229245", FieldPath:""}): type: 'Warning' reason: 'VolumeFailedDelete' persistentvolume pvc-edcb7b20-7ea7-4a53-a15d-3ce454e3aff6 is still attached to node ip-192-168-82-154.us-west-2.compute.internal
+I1214 01:08:52.639758       1 controller.go:1509] delete "pvc-edcb7b20-7ea7-4a53-a15d-3ce454e3aff6": started
+I1214 01:08:52.639810       1 controller.go:1279] volume pvc-edcb7b20-7ea7-4a53-a15d-3ce454e3aff6 does not need any deletion secrets
+E1214 01:08:52.639838       1 controller.go:1519] delete "pvc-edcb7b20-7ea7-4a53-a15d-3ce454e3aff6": volume deletion failed: persistentvolume pvc-edcb7b20-7ea7-4a53-a15d-3ce454e3aff6 is still attached to node ip-192-168-82-154.us-west-2.compute.internal
+W1214 01:08:52.639871       1 controller.go:989] Retrying syncing volume "pvc-edcb7b20-7ea7-4a53-a15d-3ce454e3aff6", failure 1
+E1214 01:08:52.639893       1 controller.go:1007] error syncing volume "pvc-edcb7b20-7ea7-4a53-a15d-3ce454e3aff6": persistentvolume pvc-edcb7b20-7ea7-4a53-a15d-3ce454e3aff6 is still attached to node ip-192-168-82-154.us-west-2.compute.internal
+I1214 01:08:52.639946       1 event.go:298] Event(v1.ObjectReference{Kind:"PersistentVolume", Namespace:"", Name:"pvc-edcb7b20-7ea7-4a53-a15d-3ce454e3aff6", UID:"9ef1827f-fe32-4f54-85b9-ab117a419ae9", APIVersion:"v1", ResourceVersion:"1229245", FieldPath:""}): type: 'Warning' reason: 'VolumeFailedDelete' persistentvolume pvc-edcb7b20-7ea7-4a53-a15d-3ce454e3aff6 is still attached to node ip-192-168-82-154.us-west-2.compute.internal
+I1214 01:08:54.640123       1 controller.go:1509] delete "pvc-edcb7b20-7ea7-4a53-a15d-3ce454e3aff6": started
+I1214 01:08:54.640168       1 controller.go:1279] volume pvc-edcb7b20-7ea7-4a53-a15d-3ce454e3aff6 does not need any deletion secrets
+E1214 01:08:54.640195       1 controller.go:1519] delete "pvc-edcb7b20-7ea7-4a53-a15d-3ce454e3aff6": volume deletion failed: persistentvolume pvc-edcb7b20-7ea7-4a53-a15d-3ce454e3aff6 is still attached to node ip-192-168-82-154.us-west-2.compute.internal
+W1214 01:08:54.640228       1 controller.go:989] Retrying syncing volume "pvc-edcb7b20-7ea7-4a53-a15d-3ce454e3aff6", failure 2
+E1214 01:08:54.640245       1 controller.go:1007] error syncing volume "pvc-edcb7b20-7ea7-4a53-a15d-3ce454e3aff6": persistentvolume pvc-edcb7b20-7ea7-4a53-a15d-3ce454e3aff6 is still attached to node ip-192-168-82-154.us-west-2.compute.internal
+I1214 01:08:54.640293       1 event.go:298] Event(v1.ObjectReference{Kind:"PersistentVolume", Namespace:"", Name:"pvc-edcb7b20-7ea7-4a53-a15d-3ce454e3aff6", UID:"9ef1827f-fe32-4f54-85b9-ab117a419ae9", APIVersion:"v1", ResourceVersion:"1229245", FieldPath:""}): type: 'Warning' reason: 'VolumeFailedDelete' persistentvolume pvc-edcb7b20-7ea7-4a53-a15d-3ce454e3aff6 is still attached to node ip-192-168-82-154.us-west-2.compute.internal
+I1214 01:08:58.640638       1 controller.go:1509] delete "pvc-edcb7b20-7ea7-4a53-a15d-3ce454e3aff6": started
+I1214 01:08:58.640716       1 controller.go:1279] volume pvc-edcb7b20-7ea7-4a53-a15d-3ce454e3aff6 does not need any deletion secrets
+E1214 01:08:58.640752       1 controller.go:1519] delete "pvc-edcb7b20-7ea7-4a53-a15d-3ce454e3aff6": volume deletion failed: persistentvolume pvc-edcb7b20-7ea7-4a53-a15d-3ce454e3aff6 is still attached to node ip-192-168-82-154.us-west-2.compute.internal
+W1214 01:08:58.640784       1 controller.go:989] Retrying syncing volume "pvc-edcb7b20-7ea7-4a53-a15d-3ce454e3aff6", failure 3
+E1214 01:08:58.640802       1 controller.go:1007] error syncing volume "pvc-edcb7b20-7ea7-4a53-a15d-3ce454e3aff6": persistentvolume pvc-edcb7b20-7ea7-4a53-a15d-3ce454e3aff6 is still attached to node ip-192-168-82-154.us-west-2.compute.internal
+I1214 01:08:58.641198       1 event.go:298] Event(v1.ObjectReference{Kind:"PersistentVolume", Namespace:"", Name:"pvc-edcb7b20-7ea7-4a53-a15d-3ce454e3aff6", UID:"9ef1827f-fe32-4f54-85b9-ab117a419ae9", APIVersion:"v1", ResourceVersion:"1229245", FieldPath:""}): type: 'Warning' reason: 'VolumeFailedDelete' persistentvolume pvc-edcb7b20-7ea7-4a53-a15d-3ce454e3aff6 is still attached to node ip-192-168-82-154.us-west-2.compute.internal
+I1214 01:09:06.641868       1 controller.go:1509] delete "pvc-edcb7b20-7ea7-4a53-a15d-3ce454e3aff6": started
+I1214 01:09:06.641921       1 controller.go:1279] volume pvc-edcb7b20-7ea7-4a53-a15d-3ce454e3aff6 does not need any deletion secrets
+I1214 01:09:06.789592       1 controller.go:1524] delete "pvc-edcb7b20-7ea7-4a53-a15d-3ce454e3aff6": volume deleted
+I1214 01:09:06.799776       1 controller.go:1569] delete "pvc-edcb7b20-7ea7-4a53-a15d-3ce454e3aff6": persistentvolume deleted succeeded
+I1214 00:27:30.138544       1 main.go:97] Version: v4.4.0
+I1214 00:27:30.140307       1 common.go:138] Probing CSI driver for readiness
+I1214 00:27:30.142677       1 main.go:154] CSI driver name: "ebs.csi.aws.com"
+I1214 00:27:30.147608       1 common.go:138] Probing CSI driver for readiness
+I1214 00:27:30.156693       1 main.go:230] CSI driver supports ControllerPublishUnpublish, using real CSI handler
+I1214 00:27:30.157194       1 leaderelection.go:250] attempting to acquire leader lease kube-system/external-attacher-leader-ebs-csi-aws-com...
+I1214 00:27:30.242890       1 main.go:109] Version: v6.3.2
+I1214 00:27:30.247407       1 common.go:138] Probing CSI driver for readiness
+I1214 00:27:30.253213       1 leaderelection.go:250] attempting to acquire leader lease kube-system/external-snapshotter-leader-ebs-csi-aws-com...
+I1214 00:27:30.320835       1 main.go:93] Version : v1.9.2
+I1214 00:27:30.320879       1 feature_gate.go:249] feature gates: &{map[]}
+I1214 00:27:30.322555       1 common.go:138] Probing CSI driver for readiness
+I1214 00:27:30.327979       1 main.go:141] CSI driver name: "ebs.csi.aws.com"
+I1214 00:27:30.329611       1 common.go:138] Probing CSI driver for readiness
+I1214 00:27:30.331883       1 leaderelection.go:250] attempting to acquire leader lease kube-system/external-resizer-ebs-csi-aws-com...
+I1214 00:27:45.626552       1 leaderelection.go:260] successfully acquired lease kube-system/external-resizer-ebs-csi-aws-com
+I1214 00:27:45.626737       1 leader_election.go:178] became leader, starting
+I1214 00:27:45.626769       1 controller.go:255] Starting external resizer ebs.csi.aws.com
+I1214 00:27:30.393431       1 main.go:149] calling CSI driver to discover driver name
+I1214 00:27:30.396665       1 main.go:155] CSI driver name: "ebs.csi.aws.com"
+I1214 00:27:30.396683       1 main.go:183] ServeMux listening at "0.0.0.0:9808"
